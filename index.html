@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELOX | Premium Cars</title>
+
+<style>
+:root {
+  --bg:#080909; --panel:#121414; --gold:#d9b36a;
+  --white:#f7f5ef; --muted:#aaa; --line:#303230;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,sans-serif}
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(1180px,92%);margin:auto}
+header{height:76px;padding:0 4%;display:flex;align-items:center;justify-content:space-between;background:#080909ee;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.logo{font-size:23px;letter-spacing:7px;font-weight:bold}
+.logo span{color:var(--gold);font-size:32px}
+nav{display:flex;gap:25px;font-size:13px}
+nav a:hover{color:var(--gold)}
+.btn{display:inline-block;padding:13px 18px;background:var(--gold);border:1px solid var(--gold);color:#111;font-size:11px;font-weight:bold;text-transform:uppercase}
+.btn.outline{background:transparent;color:white}
+.btn:hover{filter:brightness(1.12)}
+.hero{min-height:640px;display:flex;align-items:center;position:relative;background:
+linear-gradient(90deg,#050606 0%,#050606dc 35%,#05060635 100%),
+url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=85') center/cover}
+.hero-content{padding:70px 0;max-width:620px}
+.eyebrow{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
+h1,h2,h3{font-family:Georgia,serif;font-weight:normal}
+.hero h1{font-size:clamp(48px,7vw,82px);line-height:1;margin:22px 0}
+.hero h1 em{color:var(--gold);font-style:normal}
+p{line-height:1.8}
+.hero p{max-width:450px;color:#ddd;font-size:14px}
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.section{padding:80px 0}
+.heading{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:28px}
+h2{font-size:clamp(32px,4vw,48px);margin:12px 0}
+.muted{color:var(--muted);font-size:13px;max-width:440px}
+.cars,.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{border:1px solid var(--line);background:var(--panel);overflow:hidden}
+.card img{display:block;width:100%;height:230px;object-fit:cover;transition:.3s}
+.card:hover img{transform:scale(1.04)}
+.card-info{padding:20px}
+.card-info small{color:var(--gold);letter-spacing:2px}
+.card h3{font-size:27px;margin:10px 0}
+.specs{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:14px;color:#ccc;font-size:11px}
+.price{margin-top:17px;font-weight:bold}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}
+.about-image{height:400px;width:100%;object-fit:cover}
+.copy p,.service p{font-size:13px;color:var(--muted)}
+.service{border:1px solid var(--line);padding:26px;background:linear-gradient(145deg,#151716,#0b0c0c)}
+.service .symbol{color:var(--gold);font-size:28px}
+.service h3{font-size:24px}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:25px 0}
+.benefits strong{display:block;font-size:11px;letter-spacing:1px}
+.benefits span{color:var(--gold);font-size:24px}
+.cta{padding:60px 0;background:linear-gradient(90deg,#111d,#1119),url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=85') center/cover}
+.cta-inner{display:flex;justify-content:space-between;align-items:center;gap:25px}
+.cta h2{font-size:40px}
+footer{padding:30px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.footer-links{display:flex;gap:18px}
+.page{display:none;min-height:75vh}
+.page.active{display:block}
+.auth{display:grid;grid-template-columns:1fr 1fr;min-height:620px}
+.auth-photo{background:linear-gradient(#0004,#0007),url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85') center/cover}
+.auth-form{display:flex;align-items:center;justify-content:center;padding:35px}
+.form-box{width:min(420px,100%)}
+.form-box h1{font-size:43px;margin:12px 0}
+.form-box p{font-size:13px;color:var(--muted)}
+.field{display:block;margin:17px 0}
+.field span{display:block;font-size:12px;margin-bottom:8px}
+.field input,.field textarea,.field select{width:100%;padding:14px;background:#111313;border:1px solid #383a38;color:white;outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+.form-box button{width:100%;margin-top:8px}
+.form-note{text-align:center}
+.form-note a{color:var(--gold)}
+.note{font-size:12px;color:var(--gold)}
+.dashboard{padding:65px 0}
+.dashbox,.contact-form{border:1px solid var(--line);padding:28px;background:var(--panel)}
+.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--gold);color:#111;padding:15px;display:none;z-index:30}
+.toast.show{display:block}
+.menu{display:none}
+@media(max-width:800px){
+ nav{gap:12px}.cars,.services{grid-template-columns:repeat(2,1fr)}
+ .split{gap:25px}.auth{grid-template-columns:1fr}
+ .auth-photo{min-height:250px}.contact-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ header{height:68px}.menu{display:block;background:none;border:0;color:white;font-size:25px}
+ nav{display:none;position:absolute;top:68px;left:0;right:0;padding:20px;background:#080909;flex-direction:column}
+ nav.open{display:flex}.header-actions .outline{display:none}
+ .hero{min-height:600px;background-position:58% center}
+ .section{padding:55px 0}.heading{display:block}
+ .cars,.services,.split{grid-template-columns:1fr}
+ .card img{height:240px}.about-image{height:280px}
+ .benefits{grid-template-columns:1fr 1fr}
+ .cta-inner{display:block}.cta h2{font-size:32px}
+ .auth-form{padding:35px 5%}
+ .footer-inner{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <a class="logo" href="#home" onclick="showPage('home')"><span>V</span> VELOX</a>
+  <button class="menu" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+  <nav>
+    <a href="#home" onclick="showPage('home')">Home</a>
+    <a href="#cars" onclick="goSection('cars')">Our Cars</a>
+    <a href="#services" onclick="goSection('services')">Services</a>
+    <a href="#about" onclick="goSection('about')">About</a>
+    <a href="#contact" onclick="showPage('contact')">Contact</a>
+  </nav>
+  <div class="header-actions">
+    <a class="btn outline" href="#login" onclick="showPage('login')">Login</a>
+    <a class="btn" href="#signup" onclick="showPage('signup')">Sign Up</a>
+  </div>
+</header>
+
+<main id="homePage" class="page active">
+  <section class="hero">
+    <div class="wrap hero-content">
+      <div class="eyebrow">A new standard of automotive luxury</div>
+      <h1>DRIVE THE<br><em>EXTRAORDINARY.</em></h1>
+      <p>Discover exceptional performance, sculpted design and a premium automotive experience made around you.</p>
+      <div class="buttons">
+        <a class="btn" href="#cars" onclick="goSection('cars')">Explore cars ↗</a>
+        <a class="btn outline" href="#services" onclick="goSection('services')">Our services</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="cars" class="section wrap">
+    <div class="heading">
+      <div><div class="eyebrow">Curated collection</div><h2>Machines with a soul.</h2></div>
+      <p class="muted">Explore a collection selected for people who expect more from every drive.</p>
+    </div>
+    <div class="cars">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=85" alt="Real Porsche sports car">
+        <div class="card-info"><small>01 / SPORTS COUPE</small><h3>911 Carrera</h3>
+          <div class="specs"><span>Sports engine</span><span>2 doors</span><span>Luxury</span></div>
+          <div class="price">Price on enquiry</div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=85" alt="Luxury performance car">
+        <div class="card-info"><small>02 / GRAND TOURER</small><h3>Grand Tourer</h3>
+          <div class="specs"><span>Performance</span><span>Premium cabin</span><span>Comfort</span></div>
+          <div class="price">Price on enquiry</div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=85" alt="Sporty luxury sedan">
+        <div class="card-info"><small>03 / PREMIUM SPORT</small><h3>Sport Sedan</h3>
+          <div class="specs"><span>Turbo power</span><span>5 seats</span><span>Sport</span></div>
+          <div class="price">Price on enquiry</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="wrap split">
+      <img class="about-image" src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=85" alt="Luxury car photography">
+      <div class="copy">
+        <div class="eyebrow">The VELOX philosophy</div>
+        <h2>Not just a car.<br>A feeling.</h2>
+        <p>We believe the right car does more than move you from one place to another. It inspires confidence, rewards curiosity and makes every journey memorable.</p>
+        <p>VELOX brings together considered design, personal service and a passion for exceptional automobiles.</p>
+        <a class="btn outline" href="#contact" onclick="showPage('contact')">Meet the team ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap benefits">
+    <div><span>✧</span><strong>PERFORMANCE</strong><small>Carefully selected cars</small></div>
+    <div><span>◇</span><strong>PERSONAL SERVICE</strong><small>Support at every step</small></div>
+    <div><span>◈</span><strong>CONFIDENCE</strong><small>Clear guidance</small></div>
+    <div><span>↗</span><strong>EXCLUSIVITY</strong><small>A curated collection</small></div>
+  </div>
+
+  <section id="services" class="section wrap">
+    <div class="heading">
+      <div><div class="eyebrow">Beyond the showroom</div><h2>Services, tailored to you.</h2></div>
+      <p class="muted">A premium experience should feel effortless, from your first question to your first drive.</p>
+    </div>
+    <div class="services">
+      <article class="service"><div class="symbol">⌁</div><h3>Private test drives</h3><p>Arrange an appointment to experience your shortlisted car at your own pace.</p></article>
+      <article class="service"><div class="symbol">◇</div><h3>Purchase guidance</h3><p>Get help understanding vehicle options, specifications, availability and the buying process.</p></article>
+      <article class="service"><div class="symbol">✧</div><h3>Ownership support</h3><p>Ask about detailing, maintenance options and keeping your vehicle in excellent condition.</p></article>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <div><div class="eyebrow">Your next chapter starts here</div><h2>Find your extraordinary.</h2><p>Tell us what you are looking for.</p></div>
+      <a class="btn" href="#contact" onclick="showPage('contact')">Contact VELOX ↗</a>
+    </div>
+  </section>
+</main>
+
+<section id="loginPage" class="page">
+  <div class="auth">
+    <div class="auth-photo"></div>
+    <div class="auth-form">
+      <form class="form-box" onsubmit="loginDemo(event)">
+        <div class="eyebrow">Welcome back</div><h1>Sign in.</h1>
+        <p>Access your VELOX demo account.</p>
+        <label class="field"><span>Email address</span><input id="loginEmail" type="email" required placeholder="you@example.com"></label>
+        <label class="field"><span>Password</span><input id="loginPassword" type="password" required minlength="4" placeholder="Your password"></label>
+        <button class="btn" type="submit">Login securely ↗</button>
+        <p class="form-note">New here? <a href="#signup" onclick="showPage('signup')">Create an account</a></p>
+        <p class="note">Demo only. Do not use a real password.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="signupPage" class="page">
+  <div class="auth">
+    <div class="auth-photo"></div>
+    <div class="auth-form">
+      <form class="form-box" onsubmit="signupDemo(event)">
+        <div class="eyebrow">Join the community</div><h1>Create account.</h1>
+        <p>Create your local demo profile.</p>
+        <label class="field"><span>Full name</span><input id="signupName" required placeholder="Your full name"></label>
+        <label class="field"><span>Email address</span><input id="signupEmail" type="email" required placeholder="you@example.com"></label>
+        <label class="field"><span>Password</span><input id="signupPassword" type="password" required minlength="4" placeholder="At least 4 characters"></label>
+        <button class="btn" type="submit">Create account ↗</button>
+        <p class="form-note">Already registered? <a href="#login" onclick="showPage('login')">Login</a></p>
+        <p class="note">Demo only. A real website needs secure server-side authentication.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="dashboardPage" class="page">
+  <div class="wrap dashboard">
+    <div class="eyebrow">Member area</div><h1>Welcome to VELOX.</h1>
+    <div class="dashbox">
+      <h2 id="welcomeName">Your account</h2>
+      <p id="welcomeEmail"></p>
+      <p class="note">Demo dashboard only. No real bookings or dealership database is connected.</p>
+      <a class="btn" href="#cars" onclick="goSection('cars')">Browse cars</a>
+      <button class="btn outline" onclick="logoutDemo()">Log out</button>
+    </div>
+  </div>
+</section>
+
+<section id="contactPage" class="page">
+  <div class="wrap section">
+    <div class="eyebrow">Let's talk</div><h2>Make an enquiry.</h2>
+    <div class="contact-grid">
+      <div><h3>Personal service starts with a conversation.</h3>
+        <p class="muted">Ask about a car, book a test drive or learn about our services.</p>
+        <p><strong style="color:var(--gold)">VISIT</strong><br>By appointment</p>
+        <p><strong style="color:var(--gold)">EMAIL</strong><br>hello@velox.example</p>
+        <p class="note">Replace example contact details before publishing.</p>
+      </div>
+      <form class="contact-form" onsubmit="contactDemo(event)">
+        <label class="field"><span>Your name</span><input required placeholder="Full name"></label>
+        <label class="field"><span>Email address</span><input type="email" required placeholder="you@example.com"></label>
+        <label class="field"><span>I'm interested in</span><select><option>Vehicle enquiry</option><option>Test drive</option><option>Purchase guidance</option><option>Ownership support</option></select></label>
+        <label class="field"><span>Message</span><textarea rows="4" required placeholder="Tell us how we can help"></textarea></label>
+        <button class="btn" type="submit">Send enquiry ↗</button>
+        <p class="note">Demo form: no email is sent.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a class="logo" href="#home" onclick="showPage('home')"><span>V</span> VELOX</a>
+    <span>Designed for those who drive differently.</span>
+    <div class="footer-links">
+      <a href="#services" onclick="goSection('services')">Services</a>
+      <a href="#about" onclick="goSection('about')">About</a>
+      <a href="#contact" onclick="showPage('contact')">Contact</a>
+      <a href="#login" onclick="showPage('login')">Login</a>
+    </div>
+    <span>© <span id="year"></span> VELOX</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const pages = {
+  home: document.getElementById("homePage"),
+  login: document.getElementById("loginPage"),
+  signup: document.getElementById("signupPage"),
+  dashboard: document.getElementById("dashboardPage"),
+  contact: document.getElementById("contactPage")
+};
+
+function showPage(name) {
+  if (!pages[name]) name = "home";
+  Object.values(pages).forEach(page => page.classList.remove("active"));
+  pages[name].classList.add("active");
+  document.querySelector("nav").classList.remove("open");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function goSection(id) {
+  showPage("home");
+  setTimeout(() => document.getElementById(id)?.scrollIntoView({behavior:"smooth"}), 100);
+}
+
+function notify(message) {
+  const box = document.getElementById("toast");
+  box.textContent = message;
+  box.classList.add("show");
+  setTimeout(() => box.classList.remove("show"), 3000);
+}
+
+function signupDemo(event) {
+  event.preventDefault();
+  const user = {
+    name: document.getElementById("signupName").value,
+    email: document.getElementById("signupEmail").value,
+    password: document.getElementById("signupPassword").value
+  };
+  localStorage.setItem("veloxDemoUser", JSON.stringify(user));
+  document.getElementById("welcomeName").textContent = "Welcome, " + user.name;
+  document.getElementById("welcomeEmail").textContent = user.email;
+  showPage("dashboard");
+  notify("Demo account created.");
+}
+
+function loginDemo(event) {
+  event.preventDefault();
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  let user;
+  try { user = JSON.parse(localStorage.getItem("veloxDemoUser") || "null"); }
+  catch (error) { user = null; }
+
+  if (!user || user.email !== email || user.password !== password) {
+    notify("Account not found. Create a demo account first.");
+    return;
+  }
+
+  document.getElementById("welcomeName").textContent = "Welcome, " + user.name;
+  document.getElementById("welcomeEmail").textContent = user.email;
+  showPage("dashboard");
+  notify("Welcome back to VELOX.");
+}
+
+function logoutDemo() {
+  showPage("home");
+  notify("You have logged out.");
+}
+
+function contactDemo(event) {
+  event.preventDefault();
+  event.target.reset();
+  notify("Thanks! This demo form does not send email.");
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+window.addEventListener("hashchange", () => {
+  const route = location.hash.slice(1);
+  if (pages[route]) showPage(route);
+  else if (route === "contact") showPage("contact");
+  else if (["cars","about","services"].includes(route)) goSection(route);
+  else showPage("home");
+});
+</script>
+</body>
+</html>
